@@ -1,0 +1,56 @@
+<h1 class="text-3xl font-bold font-nixie mt-5">Sus Pedidos</h1>
+<h2 class="text-xl mb-5 font-light">¡Que no se te olvide ninguno!</h2>
+
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 h-[57vh]">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nombre</th>
+        <th>Fecha</th>
+        <th>Datos de Facturación/Envío</th>
+        <th>Edición</th>
+        <th>Precio</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if(!orderService.loading()) {
+        @if(orderService.checkOrders()) {
+          @for (order of orderService.orders; track $index) {
+            <tr>
+              <th>{{$index + 1}}</th>
+              <td><span class="font-bold">{{order.productos.nombre}}</span></td>
+              <td>{{order.fecha}}</td>
+              <td>
+                <ul>
+                  @for(datos of orderService.unzipDirection(order.datos); track $index) {
+                    <li><span class="font-bold">Dirección: </span>{{datos.direccion}}</li>
+                    <li><span class="font-bold">Código Postal: </span>{{datos.codPostal}}</li>
+                    <li><span class="font-bold">Ciudad: </span>{{datos.ciudad}}</li>
+                    <li><span class="font-bold">Provincia: </span>{{datos.provincia}}</li>
+                  }
+                </ul>
+              </td>
+              @if(order.digital) {
+                <td>Digital</td>
+              } @else {
+                <td>Física</td>
+              }
+              <td><span class="font-bold">{{bookService.round(+order.productos.precio)}} €</span></td>
+            </tr>
+          }
+        } @else {
+          <tr>
+            <th>1</th>
+            <td>No tiene ningún pedido. ¡Regrese cuando haga alguno!</td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+          </tr>
+        }
+      }
+    </tbody>
+  </table>
+</div>

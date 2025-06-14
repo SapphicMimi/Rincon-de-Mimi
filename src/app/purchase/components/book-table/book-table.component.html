@@ -1,0 +1,47 @@
+<div class="mt-4">
+  <h4 class="mb-4 font-semibold text-lg">Producto a Comprar</h4>
+  <div class="overflow-x-auto">
+    <table class="table">
+      <!-- head -->
+      <thead>
+        <tr>
+          <th></th>
+          <th>Producto</th>
+          <th>Precio</th>
+          <th>Edición</th>
+        </tr>
+      </thead>
+      <tbody>
+        @if(!bookService.loading()) {
+          @if (bookService.error()) {
+            <tr class="bg-base-200">
+                <th>1</th>
+                <td>{{bookService.errorMessage()}}</td>
+                <td></td>
+                <td></td>
+              </tr>
+          } @else {
+            @for (bookInfo of book; track $index) {
+              <tr class="bg-base-200">
+                <th>{{$index + 1}}</th>
+                <td>{{bookInfo.nombre}}</td>
+                <td>{{bookService.round(bookInfo.precio)}} €</td>
+                @if(bookInfo.digital) {
+                  @if(bookInfo.id_producto == 8) {
+                    <td>Edición Digital</td>
+                  } @else if(bookService.digital()) {
+                    <td>Edición Digital</td>
+                  } @else {
+                    <td>Edición Física</td>
+                  }
+                } @else {
+                  <td>Edición Física</td>
+                }
+              </tr>
+            }
+          }
+        }
+      </tbody>
+    </table>
+  </div>
+</div>

@@ -1,0 +1,107 @@
+@if(!bookService.loading()) {
+  @if(loaded) {
+    <div class="grid bg-base-200">
+      <div class="w-full">
+        <img class="h-60 w-full object-cover mask-b-from-20% mask-b-to-85% blur-xs -mb-40" src="/assets/images/portraits/{{mangaInfo[0].nombre}}.webp">
+      </div>
+      <div class="hero-content flex-col lg:flex-row justify-start">
+        <img
+          src="/assets/images/portraits/{{mangaInfo[0].nombre}}.webp"
+          class="w-60 rounded-lg shadow-2xl"
+        />
+        <div class="container">
+          <h1 class="text-5xl font-nixie mt-4 mb-4">{{mangaInfo[0].nombre}}</h1>
+          <p class="py-6 font-nixie text-xl -mt-6">
+            Titulo Alternativo: {{mangaInfo[0].nombre_alt}}
+          </p>
+          <p class="py-6 font-nixie text-2xl">
+            Precio: {{bookService.round(mangaInfo[0].precio)}} €
+          </p>
+          <div class="grid grid-cols-2 gap-3 font-bold">
+          @if(sessionService.getAdmin()) {
+            <button class="btn btn-secondary py-6 font-bold" disabled="disabled">Los admins no pueden realizar compras</button>
+          } @else {
+            @if(mangaInfo[0].digital) {
+              <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.reset()" class="btn btn-secondary py-6 font-bold">Comprar en Físico</button>
+              @if(purchased) {
+                <button class="btn btn-secondary py-6" disabled="disabled">Ya tienes este Manga en Digital</button>
+              } @else {
+                <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.changeToDigital()" class="btn btn-secondary py-6 font-bold">Comprar en Digital</button>
+              }
+            } @else {
+              <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.reset()" class="btn btn-wide btn-secondary py-6 font-bold">Comprar en Físico</button>
+            }
+          }
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <h2 class="text-2xl font-extrabold my-5 font-nixie">Sinopsis</h2>
+      <hr>
+      <p class="font-light text-lg mt-4">{{manga.synopsis}}</p>
+    </div>
+    <div>
+      <h2 class="text-2xl font-extrabold my-5 font-nixie">Información Adicional</h2>
+      <hr>
+      <ul>
+        <li><p class="font-light text-lg mt-4"><span class="font-bold">Autor/a: </span>{{manga.authors[0].name}}</p></li>
+        <li><p class="font-light text-lg"><span class="font-bold">Capitulos Totales: </span>{{manga.chapters || "Todavia no ha terminado..."}}</p></li>
+        <li><p class="font-light text-lg"><span class="font-bold">Géneros: </span></p></li>
+        <li>
+          <ul>
+            @for (genero of manga.genres; track $index) {
+              <p class="font-light text-lg"> - {{genero.name}}</p>
+            }
+          </ul>
+        </li>
+        <li><p class="font-light text-lg"><span class="font-bold">Puntuación en MAL: </span>{{manga.score || "No tiene puntuación en MAL..."}}</p></li>
+        <li><p class="font-light text-lg"><span class="font-bold">Titulo en Ingles: </span>{{manga.title_english || "No publicado"}}</p></li>
+        <li><p class="font-light text-lg"><span class="font-bold">Título en Japones: </span>{{manga.title_japanese}}</p></li>
+      </ul>
+    </div>
+    <div>
+      <h2 class="text-2xl font-extrabold my-5 font-nixie">Reviews</h2>
+      <hr>
+      <ul class="list bg-base-100 rounded-box shadow-md">
+        @if(!(this.reviews.data.length == 0)) {
+          @if(this.reviews.data.length < 4) {
+            @for (review of this.reviews.data; track $index) {
+              <li class="list-row">
+                <div class="text-4xl font-thin opacity-30 tabular-nums">0{{$index+1}}</div>
+                <div><img class="size-10 rounded-box" src="{{reviews.data[$index].user.images.webp.image_url}}"/></div>
+                <div class="list-col-grow">
+                  <div><span class="font-bold">{{review.user.username}}</span></div>
+                  <div class="text-xs uppercase font-semibold opacity-60">{{review.review}}</div>
+                  <div>Puntuación: {{review.score}}</div>
+                </div>
+              </li>
+            }
+          } @else {
+            @for (item of forLoop; track $index) {
+              <li class="list-row">
+                <div class="text-4xl font-thin opacity-30 tabular-nums">0{{$index+1}}</div>
+                <div><img class="size-10 rounded-box" src="{{reviews.data[$index].user.images.webp.image_url}}"/></div>
+                <div class="list-col-grow">
+                  <div><span class="font-bold">{{reviews.data[$index].user.username}}</span></div>
+                  <div class="text-xs uppercase font-semibold opacity-60">{{reviews.data[$index].review}}</div>
+                  <div>Puntuación: {{reviews.data[$index].score}}</div>
+                </div>
+              </li>
+            }
+          }
+        } @else {
+          <li class="list-row">
+              <div class="text-4xl font-thin opacity-30 tabular-nums">01</div>
+              <div></div>
+              <div class="list-col-grow">
+                <div><span class="font-bold">No hay reviews</span></div>
+                <div class="text-xs uppercase font-semibold opacity-60">Que pena...</div>
+              </div>
+            </li>
+        }
+      </ul>
+    </div>
+  }
+}

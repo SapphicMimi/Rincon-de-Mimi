@@ -1,0 +1,37 @@
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-2">
+  @if(!bookService.loading()) {
+    @for (book of newOrderBooks; track $index) {
+      <div class="card bg-base-100 shadow-sm animate-fadeIn mt-3">
+        <figure>
+          <img
+            src="/assets/images/portraits/{{book.nombre}}.webp"
+            alt="Manga"
+            class=""/>
+        </figure>
+        <div class="card-body">
+          <h2 class="card-title font-bold">{{book.nombre}}</h2>
+          <p>Editorial:
+              {{bookService.getProvider(book)}}
+          </p>
+          <p>Precio:
+            <span class="font-bold">
+              {{bookService.round(book.precio)}}€
+            </span>
+          </p>
+          @if(book.digital) {
+            <p>Edición:
+                Físico y Digital
+            </p>
+          } @else {
+            <p>Edición
+                Físico
+            </p>
+          }
+            <a class="card-actions grid">
+              <button routerLink="/manga/{{book.id_producto}}" [queryParams]="{id_api: book.id_api}" class="btn btn-secondary">Preview</button>
+            </a>
+        </div>
+      </div>
+    }
+  }
+</div>

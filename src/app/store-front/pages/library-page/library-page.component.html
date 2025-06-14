@@ -1,0 +1,24 @@
+<h1 class="text-3xl font-bold font-nixie mt-5">Su Biblioteca</h1>
+<h2 class="text-xl mb-5 font-light">Que tenga una buena lectura {{"<3"}}</h2>
+
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-2">
+  @if(!libraryService.loading()) {
+    @if(ready) {
+      @for (book of userBooks; track $index) {
+        <div class="shadow-sm hover:bg-secondary rounded-2xl">
+          <button routerLink="/biblioteca/{{book.id_producto}}" class="bg-base-120 p-3" (click)="this.chapterParamsService.setEnter(true, this.libraryService.getChapters(book.id_producto))">
+            <figure>
+              <img
+                src="/assets/images/portraits/{{book.nombre}}.webp"
+                alt="Manga"
+                class=""/>
+            </figure>
+            <div class="card-body items-center">
+              <h2 class="card-title text-[15px]">{{book.nombre}}</h2>
+            </div>
+          </button>
+        </div>
+      }
+    }
+  }
+</div>

@@ -1,6 +1,14 @@
 # RinconDeMimi
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 19.2.13.
+Este projecto quiere recrear una página web de compra y lectura de Mangas en línea con una Suscripción. Digo recrear, ya que no tiene las funcionalidades de compra ni de envio, pero las recrea. Por lo demás, se puede leer los primeros capitulos de los mangas digitales, si se compran, o si se suscribe a la suscripción de la página, ademas de ver los detalles de de cada manga.
+
+El backend que utiliza es Supabase, por lo que no es necesario abrir ningun backend local.
+
+Lo siguiente, es para tanto abrirlo en local y desarrollar en el, o simplemente verlo, y para más cosas.
+
+Recordar hacer `````npm install`````para instalar todos los paquetes.
+
+Y lo más recomendable para arrancarlo en local es ````ng serve````.
 
 ## Development server
 
@@ -12,19 +20,6 @@ ng serve
 
 Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
 
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
 
 ## Building
 
@@ -53,7 +48,3 @@ ng e2e
 ```
 
 Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.

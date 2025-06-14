@@ -1,0 +1,117 @@
+<h1 class="text-3xl font-bold font-nixie mt-5">Panel de Administrador</h1>
+<h2 class="text-2xl mb-5 font-light">Realizar pedido de Libros Físicos</h2>
+
+@if(!bookService.loading()) {
+  @if(validators.isValidField(updateQuantityForm, 'quantity')) {
+    <div role="alert" class="alert alert-error my-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ validators.getFieldError(updateQuantityForm, 'quantity') }}</span>
+    </div>
+  }
+}
+
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nombre</th>
+        <th>ID Producto</th>
+        <th>Proveedor</th>
+        <th>ID Proveedor</th>
+        <th>Cantidad</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if(!bookService.loading()) {
+          @for (book of physicalBooks; track $index) {
+            <tr>
+              <th>{{$index + 1}}</th>
+              <td><span class="font-bold">{{book.nombre}}</span></td>
+              <td>{{book.id_producto}}</td>
+              <td><span class="font-bold">{{bookService.getProvider(book)}}</span></td>
+              <td>{{bookService.getIDProvider(book)}}</td>
+              <td>{{book.cantidad}}</td>
+              <td>
+                <button class="btn btn-secondary" type="button" (click)="showFormQuantity(book.id_producto, book.cantidad, book.nombre)">Realizar Pedido</button>
+              </td>
+            </tr>
+          }
+        }
+    </tbody>
+  </table>
+</div>
+
+@if(boolUpdate) {
+  <div class="mt-3">
+    <h2 class="text-xl mb-5 font-light">Ingrese la cantidad de libros de la que quiere hacer el pedido:</h2>
+    <h2 class="text-l text-md mb-5 font-light">Libro al que se le realizando pedido: <span class="font-bold">{{this.book}}</span></h2>
+    <form [formGroup]="updateQuantityForm" (ngSubmit)="onSubmitUpdate()" class="grid grid-cols-2">
+      <input type="hidden" formControlName="id">
+      <input type="number" value="1" formControlName="quantity">
+      <button type="submit" class="btn ml-3" [ngClass]="{'btn-error': validators.isValidField(updateQuantityForm, 'quantity')}">Realizar Pedido</button>
+    </form>
+  </div>
+}
+
+@if(!bookService.loading()) {
+  @if(validators.isValidField(updatePriceForm, 'price')) {
+    <div role="alert" class="alert alert-error my-6">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>{{ validators.getFieldError(updatePriceForm, 'price') }}</span>
+    </div>
+  }
+}
+
+<h2 class="text-2xl font-light my-5">Actualizar precio Libros</h2>
+<div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
+  <table class="table">
+    <!-- head -->
+    <thead>
+      <tr>
+        <th></th>
+        <th>Nombre</th>
+        <th>ID Producto</th>
+        <th>Proveedor</th>
+        <th>ID Proveedor</th>
+        <th>Precio</th>
+        <th>Acciones</th>
+      </tr>
+    </thead>
+    <tbody>
+      @if(!bookService.loading()) {
+          @for (book of allBooks; track $index) {
+            <tr>
+              <th>{{$index + 1}}</th>
+              <td><span class="font-bold">{{book.nombre}}</span></td>
+              <td>{{book.id_producto}}</td>
+              <td><span class="font-bold">{{bookService.getProvider(book)}}</span></td>
+              <td>{{bookService.getIDProvider(book)}}</td>
+              <td>{{bookService.round(book.precio)}} €</td>
+              <td>
+                <button class="btn btn-secondary" type="button" (click)="showFormPrice(book.id_producto, book.cantidad, book.nombre)">Actualizar Precio</button>
+              </td>
+            </tr>
+          }
+        }
+    </tbody>
+  </table>
+</div>
+
+@if(boolPrice) {
+  <div class="mt-3">
+    <h2 class="text-l mb-5 font-light">Ingrese el nuevo precio que va a tener el libro:</h2>
+    <h2 class="text-l text-md mb-5 font-light">Libro al que se le realizando el cambio de precio: <span class="font-bold">{{this.book}}</span></h2>
+    <form [formGroup]="updatePriceForm" (ngSubmit)="onSubmitPrice()" class="grid grid-cols-2">
+      <input type="hidden" formControlName="id">
+      <input type="number" value="1" formControlName="price">
+      <button type="submit" class="btn ml-3" [ngClass]="{'btn-error': validators.isValidField(updatePriceForm, 'price')}">Actualizar Precio</button>
+    </form>
+  </div>
+}

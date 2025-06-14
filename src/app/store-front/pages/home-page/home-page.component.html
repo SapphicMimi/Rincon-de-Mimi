@@ -1,0 +1,26 @@
+
+@if(sessionService.suscription()) {
+  <div role="alert" class="alert alert-error mb-3 animate-fadeIn">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Su suscripción ha terminado... Espero que le haya gustado nuestro servicio</span>
+  </div>
+}
+
+<div class="grid grid-cols-1">
+  <suscription-card />
+</div>
+
+<hr>
+
+<h1 class="text-3xl font-bold font-nixie mt-5">Catálogo de la tienda</h1>
+<h2 class="text-xl mb-5 font-light">Novedades</h2>
+
+<new-books/>
+
+<hr>
+
+<h1 class="text-3xl font-bold font-nixie mt-5">Sobre nosotros</h1>
+<h2 class="text-xl mb-5 font-light">Conocenos un poco</h2>
+<p class="mb-5">Rincón de Mimi es una pequeña empresa dedicada a la distribución física y digital de manga en español. Decidimos especializarnos en las demografías shoujo/josei para promoverlas en un mercado donde muchas veces están invisibilizadas. Trabajamos con varias editoriales nacionales e internacionales buscando las mejores historias, tanto populares como joyas ocultas aún por conocer. Tenemos la esperanza de que cualquier persona pueda encontrar un manga para sí en Rincón de Mimi ^^.</p>

@@ -1,0 +1,218 @@
+<div class="text-center mb-4">
+  <h1 class="text-2xl font-semibold tracking-tight text-balance sm:text-4xl font-nixie">Compra del Producto</h1>
+</div>
+
+@if(purchaseService.error()) {
+  <div role="alert" class="alert alert-error">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{purchaseService.errorMessage()}}</span>
+  </div>
+} @else if(bookService.error()) {
+  <div role="alert" class="alert alert-error">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>{{bookService.errorMessage()}}</span>
+    <span>Ha ocurrido un problema con el servidor, pero el pedido se ha realizado.</span>
+  </div>
+} @else {
+  <div *ngIf="bool" role="alert" class="alert alert-success">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>¡Producto comprado con exito!</span>
+  </div>
+}
+
+  <form [formGroup]="purchaseForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2 mt-3">
+    <div class="grid grid-cols-2 gap-5">
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <legend class="fieldset-legend">Datos de Facturación</legend>
+
+        <label class="label">Dirección</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'direccion')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="direccion" placeholder="Dirección" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'direccion')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'direccion') }}
+        </span>
+
+        <label class="label">Código Postal</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'codPostal')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="codPostal" placeholder="Código Postal" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'codPostal')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'codPostal') }}
+        </span>
+
+        <label class="label">Ciudad</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'ciudad')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="ciudad" placeholder="Ciudad" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'ciudad')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'ciudad') }}
+        </span>
+
+        <label class="label">Provincia</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'provincia')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="provincia" placeholder="Provincia" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'provincia')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'provincia') }}
+        </span>
+
+      </fieldset>
+
+      <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+        <legend class="fieldset-legend">Método de Pago</legend>
+
+        <label class="label">Nombre en la Tarjeta</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'nombreTarjeta')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="nombreTarjeta" placeholder="Nombre" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'nombreTarjeta')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'nombreTarjeta') }}
+        </span>
+
+        <label class="label">Número de la Tarjeta</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'numeroTarjeta')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="numeroTarjeta" placeholder="Tarjeta" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'numeroTarjeta')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'numeroTarjeta') }}
+        </span>
+
+        <label class="label">Fecha de Caducidad</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'fechaTarjeta')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="fechaTarjeta" placeholder="Fecha" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'fechaTarjeta')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'fechaTarjeta') }}
+        </span>
+
+        <label class="label">Número de Seguridad</label>
+        <label class="input" [ngClass]="{'input-error': validators.isValidField(purchaseForm, 'numeroSeguridad')}">
+          <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <g
+              stroke-linejoin="round"
+              stroke-linecap="round"
+              stroke-width="2.5"
+              fill="none"
+              stroke="currentColor"
+            >
+              <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"></path>
+              <circle cx="12" cy="7" r="4"></circle>
+            </g>
+          </svg>
+          <input type="text" class="input" formControlName="numeroSeguridad" placeholder="Seguridad" />
+        </label>
+        <span *ngIf="validators.isValidField(purchaseForm, 'numeroSeguridad')" class="form-text text-danger">
+          {{ validators.getFieldError(purchaseForm, 'numeroSeguridad') }}
+        </span>
+
+      </fieldset>
+    </div>
+
+    <book-table [id]="bookId" />
+
+    @if(!bookService.loading()) {
+      @if(checkQuantity()) {
+        <button type="submit" class="btn btn-secondary mt-4" disabled="disabled">No tenemos más stock</button>
+      } @else {
+        <button type="submit" class="btn btn-secondary mt-4">Comprar</button>
+      }
+    }
+  </form>
+
+  <p class="mt-8 text-sm">¿Desea volver al inicio? Pulse aquí:</p>
+  <div class="grid">
+    <button type="button" routerLink="" class="btn bg-white text-black border-[#e5e5e5]" type="submit">
+      Volver
+    </button>
+  </div>

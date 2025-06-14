@@ -1,0 +1,95 @@
+<div class="grid bg-base-200">
+  <div class="w-full">
+    <img class="h-60 w-full object-cover mask-b-from-20% mask-b-to-85% blur-xs -mb-40" src="/assets/images/suscription/portada_ancha.webp">
+  </div>
+  <div class="hero-content flex-col lg:flex-row justify-start">
+    <img
+      src="/assets/images/suscription/portada.webp"
+      class="max-w-sm rounded-lg shadow-2xl"
+    />
+    <div>
+      <h1 class="text-5xl font-nixie mt-4 mb-4">Suscripción - Rincón+</h1>
+      <p class="py-6 font-nixie text-xl">
+        ¡Prueba a descubrir tu nuevo manga favorito!
+      </p>
+      @if(!bookService.loading()) {
+        @if(suscriptionService.checkSuscription()) {
+          <button class="btn btn-wide btn-secondary" disabled="disabled">¡Ya estas suscrito!</button>
+        } @else if(sessionService.getAdmin()) {
+          <button class="btn btn-wide btn-secondary" disabled="disabled">¡Ya estas suscrito!</button>
+        } @else {
+          @if(this.sessionService.checkSession()) {
+            <button routerLink="/purchase/8" (click)="bookService.changeToDigital()" class="btn btn-wide btn-secondary">Suscribirse por {{bookService.round(getPrice(books))}}€</button>
+          } @else {
+            <button class="btn btn-wide btn-secondary" disabled="disabled">Inicie Sesión primero...</button>
+          }
+        }
+      }
+    </div>
+  </div>
+</div>
+<div class="mt-5">
+  <div>
+    <h4 class="text-3xl font-nixie">Beneficios de la Suscripción</h4>
+  </div>
+  <div>
+    <ul class="list bg-base-100 rounded-box shadow-md">
+
+      <li class="list-row flex">
+        <div class="text-4xl font-thin opacity-30 tabular-nums">01</div>
+        <div class="list-col-grow flex flex-col justify-start">
+          <p class="text-lg font-medium">Acceso inmediato a una lista de mangas.</p>
+          <div class="text-xs uppercase font-semibold opacity-60">Una vez te suscribas tendrás al momento nuevos mangas en tu biblioteca.</div>
+        </div>
+      </li>
+
+      <li class="list-row flex">
+        <div class="text-4xl font-thin opacity-30 tabular-nums">02</div>
+        <div class="list-col-grow flex flex-col justify-start">
+          <p class="text-lg font-medium">¡Nuevos mangas cada mes!</p>
+          <div class="text-xs uppercase font-semibold opacity-60">Cada 30 días añadimos nuevos mangas a la lista.</div>
+        </div>
+      </li>
+
+      <li class="list-row flex">
+        <div class="text-4xl font-thin opacity-30 tabular-nums">03</div>
+        <div class="list-col-grow flex flex-col justify-start">
+          <p class="text-lg font-medium">Sin Renovaciones Áutomaticas</p>
+          <div class="text-xs uppercase font-semibold opacity-60">Si se te va a acabar tu suscripción y no te interesan los mangas, no hace falta cancelar</div>
+        </div>
+      </li>
+
+    </ul>
+  </div>
+</div>
+@if(!bookService.loading()) {
+  <div class="mt-4 mb-6">
+    <div>
+      <h4 class="text-3xl font-nixie">Mangas de este Mes</h4>
+    </div>
+    <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100 mt-3">
+      <table class="table">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th></th>
+            <th>Manga</th>
+            <th>Editorial</th>
+            <th>Nombre Alternativo</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- row 1 -->
+          @for (book of books; track $index) {
+            <tr>
+              <th>{{$index + 1}}</th>
+              <td>{{book.nombre}}</td>
+              <td>{{bookService.getProvider(book)}}</td>
+              <td>{{book.nombre_alt}}</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  </div>
+}

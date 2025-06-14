@@ -1,0 +1,38 @@
+<div class="container">
+  @for (item of forLoop; track $index) {
+    <img src="/assets/images/chapters/{{bookId}}/{{this.chapterParamsService.chapter}}/{{$index + 1}}.webp" class="w-full">
+  }
+
+  @if(this.chapterParamsService.chapter == 1) {
+    <h2 class="text-xl mb-5 font-light my-8 text-end">¿Siguiente Capitulo?</h2>
+    <div class="grid grid-cols-1 mt-3 container">
+      @if(this.chapterParamsService.allChapters > 1) {
+        <a class="btn btn-secondary py-6" routerLink="/biblioteca/leer/{{bookId}}" (click)="alterForLoop(true)" (click)="toTop()">Ir al Capítulo Siguiente</a>
+      } @else {
+        <a class="btn btn-secondary py-6" disabled="disabled">¡Estas al día!</a>
+      }
+    </div>
+  } @else {
+    <div class="grid grid-cols-2 mt-3 container">
+      <h2 class="text-xl mb-5 font-light mt-3">Capitulo Anterior</h2>
+      <h2 class="text-xl mb-5 font-light mt-3 text-end">Capitulo Siguiente</h2>
+    </div>
+    <div class="grid grid-cols-2 mt-3 container">
+      <a class="btn btn-secondary mr-3 py-6" routerLink="/biblioteca/leer/{{bookId}}" (click)="alterForLoop(false)" (click)="toTop()" >Capitulo Anterior</a>
+      @if(this.chapterParamsService.allChapters == this.chapterParamsService.chapter) {
+        <a class="btn btn-secondary py-6" disabled="disabled">¡Estas al día!</a>
+      } @else {
+        <a class="btn btn-secondary py-6" routerLink="/biblioteca/leer/{{bookId}}" (click)="alterForLoop(true)" (click)="toTop()" >Ir al Capítulo Siguiente</a>
+      }
+    </div>
+  }
+  <div class="grid grid-cols-1 mt-3 container">
+    <h2 class="text-xl mb-5 font-light mt-3">¿Desea volver a la selección de capítulos?</h2>
+  </div>
+  <div class="grid grid-cols-1 container">
+    <button routerLink="/biblioteca/{{bookId}}" (click)="this.chapterParamsService.setEnter(true, this.chapterParamsService.allChapters)" (click)="toTop()" class="btn bg-white text-black border-[#e5e5e5] py-6" type="submit">
+      Volver
+    </button>
+  </div>
+
+</div>

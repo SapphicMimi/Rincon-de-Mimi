@@ -1,0 +1,79 @@
+<div class="text-center mb-6">
+  <h1 class="text-2xl font-semibold tracking-tight text-balance sm:text-6xl">Login</h1>
+</div>
+
+  <form [formGroup]="loginForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+    <fieldset class="fieldset bg-base-200 border-base-300 rounded-box w-xs border p-4">
+
+      <div *ngIf="bool" role="alert" class="alert alert-warning">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+        <span>El email o contraseña introducidos son incorrectos</span>
+      </div>
+
+      <div *ngIf="success" role="alert" class="alert alert-success">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+        </svg>
+        <span>¡Login realizado con exito!</span>
+      </div>
+
+      <label class="label">Email</label>
+      <label class="input" [ngClass]="{'input-error': validators.isValidField(loginForm, 'email'), 'input-warning': bool}">
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <rect width="20" height="16" x="2" y="4" rx="2"></rect>
+            <path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path>
+          </g>
+        </svg>
+        <input type="email" class="input" formControlName="email" placeholder="Email" />
+      </label>
+      <span *ngIf="validators.isValidField(loginForm, 'email')" class="form-text text-danger">
+        {{ validators.getFieldError(loginForm, 'email') }}
+      </span>
+
+      <label class="label">Password</label>
+      <label class="input" [ngClass]="{'input-error': validators.isValidField(loginForm, 'pass'), 'input-warning': bool}">
+        <svg class="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <g
+            stroke-linejoin="round"
+            stroke-linecap="round"
+            stroke-width="2.5"
+            fill="none"
+            stroke="currentColor"
+          >
+            <path
+              d="M2.586 17.414A2 2 0 0 0 2 18.828V21a1 1 0 0 0 1 1h3a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h1a1 1 0 0 0 1-1v-1a1 1 0 0 1 1-1h.172a2 2 0 0 0 1.414-.586l.814-.814a6.5 6.5 0 1 0-4-4z"
+            ></path>
+            <circle cx="16.5" cy="7.5" r=".5" fill="currentColor"></circle>
+          </g>
+        </svg>
+        <input type="password" class="input" formControlName="pass" placeholder="Password" />
+      </label>
+      <span *ngIf="validators.isValidField(loginForm, 'pass')" class="form-text text-danger">
+        {{ validators.getFieldError(loginForm, 'pass') }}
+      </span>
+
+      <button type="submit" class="btn btn-neutral mt-4">Login</button>
+
+      <p class="mt-3">¿No tienes una cuenta? Haz click aquí para resgistrarte:</p>
+      <button routerLink="/auth/register" class="btn bg-white text-black border-[#e5e5e5]" type="submit">
+        <svg aria-label="Email icon" width="16" height="16" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="black"><rect width="20" height="16" x="2" y="4" rx="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></g></svg>
+        Register With Email
+      </button>
+
+      <p class="mt-3">¿Desea volver al inicio? Pulse aquí:</p>
+      <a routerLink="/" class="btn bg-white text-black border-[#e5e5e5]" type="submit">
+        Volver
+      </a>
+    </fieldset>
+  </form>
+
+

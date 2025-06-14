@@ -1,0 +1,84 @@
+<div class="navbar h-20 bg-base-100 shadow-sm">
+  <div class="navbar-start">
+    <div class="dropdown">
+      <div tabindex="0" role="button" class="btn btn-ghost xl:hidden">
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+      </div>
+      <ul
+        tabindex="0"
+        class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow font-bold">
+        <li><a routerLink="/manga">Mangas</a></li>
+        <li><a routerLink="/suscription">Suscripción</a></li>
+        @if(sessionService.getAdmin()) {
+          <li><a routerLink="/admin">Panel de Control</a></li>
+          <li><a routerLink="/biblioteca">Tu Biblioteca</a></li>
+        } @else if(sessionService.checkSession()) {
+          <li><a routerLink="/pedidos">Tus Pedidos</a></li>
+          <li><a routerLink="/biblioteca">Tu Biblioteca</a></li>
+        }
+      </ul>
+    </div>
+    <button class="md:ml-4 md:mr-4" routerLink="/">
+      <img class="w-35 hidden md:inline" src="/assets/images/brand/icon.png">
+    </button>
+    <button routerLink="/" class="btn btn-ghost text-xl font-nixie">
+      Rincón de
+      <span class="text-secondary">
+        Mimí
+      </span>
+    </button>
+  </div>
+  <div class="navbar-center hidden xl:flex bg-secondary rounded-lg font-bold">
+    <ul class="menu menu-horizontal px-1 gap-4">
+      <li><a routerLink="/manga">Mangas</a></li>
+      <li><a routerLink="/suscription">Suscripción</a></li>
+      @if(sessionService.getAdmin()) {
+        <li><a routerLink="/admin">Panel de Control</a></li>
+        <li><a routerLink="/biblioteca">Tu Biblioteca</a></li>
+      } @else if(sessionService.checkSession()) {
+        <li><a routerLink="/pedidos">Tus Pedidos</a></li>
+        <li><a routerLink="/biblioteca">Tu Biblioteca</a></li>
+      }
+    </ul>
+  </div>
+  <div class="navbar-end">
+    @if(sessionService.checkSession()) {
+      @if(suscription) {
+        <div class="badge badge-success sm:inline-flex hidden">
+          <svg class="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></circle><polyline points="7 13 10 16 17 8" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></polyline></g></svg>
+          Suscrito
+        </div>
+      } @else if (sessionService.getAdmin()) {
+        <div class="badge badge-info sm:inline-flex hidden">
+          <svg class="size-[1em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g fill="currentColor" stroke-linejoin="miter" stroke-linecap="butt"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></circle><path d="m12,17v-5.5c0-.276-.224-.5-.5-.5h-1.5" fill="none" stroke="currentColor" stroke-linecap="square" stroke-miterlimit="10" stroke-width="2"></path><circle cx="12" cy="7.25" r="1.25" fill="currentColor" stroke-width="2"></circle></g></svg>
+          Admin
+        </div>
+      }
+      <div class="flex-none ml-3">
+        <p class="bg-base-100 mr-4 text-sm">¡Bienvenido/a {{getCredentials()}}!</p>
+      </div>
+      <div class="dropdown dropdown-end mr-4">
+        <div tabindex="0" role="button" class="btn btn-ghost btn-circle avatar">
+          <div class="w-10 rounded-full">
+            <img
+              alt="Default Image"
+              src="https://cdn-icons-png.freepik.com/512/9385/9385289.png" />
+          </div>
+        </div>
+        <ul
+          tabindex="0"
+          class="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+          <li>
+            <a (click)="sessionService.logoutWithRedirect()" class="justify-between">
+              Log Out
+              <span class="badge">New</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    } @else {
+      <a class="btn mr-4 text-md" routerLink="/auth">Login</a>
+      <a class="btn btn-secondary mr-4 text-md" routerLink="/auth/register">Register</a>
+    }
+  </div>
+</div>
