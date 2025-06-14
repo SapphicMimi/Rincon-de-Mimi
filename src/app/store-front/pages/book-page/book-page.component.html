@@ -20,6 +20,8 @@
           <div class="grid grid-cols-2 gap-3 font-bold">
           @if(sessionService.getAdmin()) {
             <button class="btn btn-secondary py-6 font-bold" disabled="disabled">Los admins no pueden realizar compras</button>
+          } @else if(!sessionService.checkSession()) {
+            <button class="btn btn-secondary py-6 font-bold" routerLink="/auth">¡Inice Sesión o registrese para comprar!</button>
           } @else {
             @if(mangaInfo[0].digital) {
               <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.reset()" class="btn btn-secondary py-6 font-bold">Comprar en Físico</button>
@@ -29,7 +31,7 @@
                 <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.changeToDigital()" class="btn btn-secondary py-6 font-bold">Comprar en Digital</button>
               }
             } @else {
-              <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.reset()" class="btn btn-wide btn-secondary py-6 font-bold">Comprar en Físico</button>
+              <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.reset()" class="btn btn-secondary py-6 font-bold">Comprar en Físico</button>
             }
           }
           </div>
