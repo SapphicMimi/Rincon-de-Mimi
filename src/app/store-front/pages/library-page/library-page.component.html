@@ -1,7 +1,7 @@
 <h1 class="text-3xl font-bold font-nixie mt-5">Su Biblioteca</h1>
 <h2 class="text-xl mb-5 font-light">Que tenga una buena lectura {{"<3"}}</h2>
 
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-2">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-2 mb-4">
   @if(!libraryService.loading()) {
     @if(ready) {
       @for (book of userBooks; track $index) {

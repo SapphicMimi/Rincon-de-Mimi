@@ -1,4 +1,4 @@
-<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-2">
+<div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-2 mb-4">
   @if(!bookService.loading()) {
     @for (book of books; track $index) {
       <div class="card bg-base-100 shadow-sm animate-fadeIn mt-3">
