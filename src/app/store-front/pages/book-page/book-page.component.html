@@ -12,7 +12,7 @@
         <div class="container">
           <h1 class="text-5xl font-nixie mt-4 mb-4">{{mangaInfo[0].nombre}}</h1>
           <p class="py-6 font-nixie text-xl -mt-6">
-            Titulo Alternativo: {{mangaInfo[0].nombre_alt}}
+            Título Alternativo: {{mangaInfo[0].nombre_alt}}
           </p>
           <p class="py-6 font-nixie text-2xl">
             Precio: {{bookService.round(mangaInfo[0].precio)}} €
@@ -21,7 +21,7 @@
           @if(sessionService.getAdmin()) {
             <button class="btn btn-secondary py-6 font-bold" disabled="disabled">Los admins no pueden realizar compras</button>
           } @else if(!sessionService.checkSession()) {
-            <button class="btn btn-secondary py-6 font-bold" routerLink="/auth">¡Inice Sesión o registrese para comprar!</button>
+            <button class="btn btn-secondary py-6 font-bold" routerLink="/auth">¡Inicie Sesión o registrese para comprar!</button>
           } @else {
             @if(mangaInfo[0].digital) {
               <button routerLink="/purchase/{{mangaInfo[0].id_producto}}" (click)="bookService.reset()" class="btn btn-secondary py-6 font-bold">Comprar en Físico</button>
