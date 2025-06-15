@@ -4,20 +4,26 @@
 <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 mt-2 mb-4">
   @if(!libraryService.loading()) {
     @if(ready) {
-      @for (book of userBooks; track $index) {
-        <div class="shadow-sm hover:bg-secondary rounded-2xl">
-          <button routerLink="/biblioteca/{{book.id_producto}}" class="bg-base-120 p-3" (click)="this.chapterParamsService.setEnter(true, this.libraryService.getChapters(book.id_producto))">
-            <figure>
-              <img
-                src="/assets/images/portraits/{{book.nombre}}.webp"
-                alt="Manga"
-                class=""/>
-            </figure>
-            <div class="card-body items-center">
-              <h2 class="card-title text-[15px]">{{book.nombre}}</h2>
-            </div>
-          </button>
+      @if(userBooks.length == 0) {
+        <div class="shadow-sm h-[57vh]">
+          <h3 class="font-light">No tiene ningun manga comprado... ¡Vuelva cuando se suscriba o compre alguno!</h3>
         </div>
+      } @else {
+        @for (book of userBooks; track $index) {
+          <div class="shadow-sm hover:bg-secondary rounded-2xl">
+            <button routerLink="/biblioteca/{{book.id_producto}}" class="bg-base-120 p-3" (click)="this.chapterParamsService.setEnter(true, this.libraryService.getChapters(book.id_producto))">
+              <figure>
+                <img
+                  src="/assets/images/portraits/{{book.nombre}}.webp"
+                  alt="Manga"
+                  class=""/>
+              </figure>
+              <div class="card-body items-center">
+                <h2 class="card-title text-[15px]">{{book.nombre}}</h2>
+              </div>
+            </button>
+          </div>
+        }
       }
     }
   }

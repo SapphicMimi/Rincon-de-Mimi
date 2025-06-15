@@ -137,11 +137,11 @@ export class LibraryPageComponent {
     this.userBooks = this.removeDuplicates(this.userBooks)
 
     this.ready = true;
+
+    console.log(this.userBooks)
   }
 
   ngOnInit() {
-
-
     this.getOrders();
   }
 }
