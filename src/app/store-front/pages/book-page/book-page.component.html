@@ -77,7 +77,7 @@
                 <div class="list-col-grow">
                   <div><span class="font-bold">{{review.user.username}}</span></div>
                   <div class="text-xs uppercase font-semibold opacity-60">{{review.review}}</div>
-                  <div>Puntuación: {{review.score}}</div>
+                  <div class="text-xs uppercase font-semibold opacity-100"> <span class="font-bold">Puntuación: </span>{{reviews.data[$index].score}}</div>
                 </div>
               </li>
             }
