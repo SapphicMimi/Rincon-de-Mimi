@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SessionService } from '../../../shared/services/session.service';
 
 @Component({
   selector: 'footer-component',
@@ -9,4 +10,7 @@ import { RouterModule } from '@angular/router';
 
 export class FooterComponent {
 
+  constructor(
+    public sessionService: SessionService,
+  ) {}
 }

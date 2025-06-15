@@ -2,12 +2,13 @@
   @if(loaded) {
     <div class="grid bg-base-200">
       <div class="w-full">
-        <img class="h-60 w-full object-cover mask-b-from-20% mask-b-to-85% blur-xs -mb-40" src="/assets/images/portraits/{{mangaInfo[0].nombre}}.webp">
+        <img class="h-60 w-full object-cover mask-b-from-20% mask-b-to-85% blur-xs -mb-40" src="/assets/images/portraits/{{mangaInfo[0].nombre}}.webp" alt="Imagen de Banner">
       </div>
       <div class="hero-content flex-col lg:flex-row justify-start">
         <img
           src="/assets/images/portraits/{{mangaInfo[0].nombre}}.webp"
           class="w-60 rounded-lg shadow-2xl"
+          alt="Imagen de Portada"
         />
         <div class="container">
           <h1 class="text-5xl font-nixie mt-4 mb-4">{{mangaInfo[0].nombre}}</h1>
@@ -54,7 +55,7 @@
         <li>
           <ul>
             @for (genero of manga.genres; track $index) {
-              <p class="font-light text-lg"> - {{genero.name}}</p>
+              <li class="font-light text-lg"> - {{genero.name}}</li>
             }
           </ul>
         </li>
@@ -71,8 +72,8 @@
           @if(this.reviews.data.length < 4) {
             @for (review of this.reviews.data; track $index) {
               <li class="list-row">
-                <div class="text-4xl font-thin opacity-30 tabular-nums">0{{$index+1}}</div>
-                <div><img class="size-10 rounded-box" src="{{reviews.data[$index].user.images.webp.image_url}}"/></div>
+                <div class="text-4xl font-thin tabular-nums">0{{$index+1}}</div>
+                <div><img class="size-10 rounded-box" src="{{reviews.data[$index].user.images.webp.image_url}}" alt="Imagen de Usuario de MAL"/></div>
                 <div class="list-col-grow">
                   <div><span class="font-bold">{{review.user.username}}</span></div>
                   <div class="text-xs uppercase font-semibold opacity-60">{{review.review}}</div>
@@ -83,8 +84,8 @@
           } @else {
             @for (item of forLoop; track $index) {
               <li class="list-row">
-                <div class="text-4xl font-thin opacity-30 tabular-nums">0{{$index+1}}</div>
-                <div><img class="size-10 rounded-box" src="{{reviews.data[$index].user.images.webp.image_url}}"/></div>
+                <div class="text-4xl font-thin tabular-nums">0{{$index+1}}</div>
+                <div><img class="size-10 rounded-box" src="{{reviews.data[$index].user.images.webp.image_url}}" alt="Imagen de Usuario de MAL"/></div>
                 <div class="list-col-grow">
                   <div><span class="font-bold">{{reviews.data[$index].user.username}}</span></div>
                   <div class="text-xs uppercase font-semibold opacity-60">{{reviews.data[$index].review}}</div>
@@ -95,7 +96,7 @@
           }
         } @else {
           <li class="list-row">
-              <div class="text-4xl font-thin opacity-30 tabular-nums">01</div>
+              <div class="text-4xl font-thin tabular-nums">01</div>
               <div></div>
               <div class="list-col-grow">
                 <div><span class="font-bold">No hay reviews</span></div>

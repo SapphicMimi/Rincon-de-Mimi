@@ -6,12 +6,12 @@
     <ul class="list bg-base-100 rounded-box shadow-md">
       @for (item of forLoop; track $index) {
         <li class="list-row flex">
-          <div class="text-4xl font-thin opacity-30 tabular-nums">0{{$index + 1}}</div>
+          <div class="text-4xl font-thin tabular-nums">0{{$index + 1}}</div>
           <div class="list-col-grow flex flex-col justify-start">
             <p class="text-lg font-medium">Capítulo {{$index + 1}}</p>
             <div class="text-xs uppercase font-semibold opacity-60">¡Ya Disponible!</div>
           </div>
-          <button routerLink="/biblioteca/leer/{{bookId}}" (click)="chapterParamsService.setChapterAndImages($index + 1, this.libraryService.getImages(+bookId, $index + 1))" class="btn btn-square btn-ghost">
+          <button routerLink="/biblioteca/leer/{{bookId}}" (click)="chapterParamsService.setChapterAndImages($index + 1, this.libraryService.getImages(+bookId, $index + 1))" class="btn btn-square btn-ghost" title="Botón para leer el manga">
             <svg class="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>
           </button>
         </li>
@@ -19,7 +19,7 @@
 
       @if(+bookId != 2) {
         <li class="list-row flex">
-          <div class="text-4xl font-thin opacity-30 tabular-nums">02</div>
+          <div class="text-4xl font-thin tabular-nums">02</div>
           <div class="list-col-grow flex flex-col justify-start">
             <p class="text-lg font-medium">Capítulo 2</p>
             <div class="text-xs uppercase font-semibold opacity-60">No disponible. Por ahora...</div>
@@ -28,7 +28,7 @@
       }
 
       <li class="list-row flex">
-        <div class="text-4xl font-thin opacity-30 tabular-nums">03</div>
+        <div class="text-4xl font-thin tabular-nums">03</div>
         <div class="list-col-grow flex flex-col justify-start">
           <p class="text-lg font-medium">Capítulo 3</p>
           <div class="text-xs uppercase font-semibold opacity-60">No disponible. Por ahora...</div>
@@ -36,7 +36,7 @@
       </li>
 
       <li class="list-row flex">
-        <div class="text-4xl font-thin opacity-30 tabular-nums">04</div>
+        <div class="text-4xl font-thin tabular-nums">04</div>
         <div class="list-col-grow flex flex-col justify-start">
           <p class="text-lg font-medium">Capítulo 4</p>
           <div class="text-xs uppercase font-semibold opacity-60">No disponible. Por ahora...</div>
@@ -44,7 +44,7 @@
       </li>
 
       <li class="list-row flex">
-        <div class="text-4xl font-thin opacity-30 tabular-nums">05</div>
+        <div class="text-4xl font-thin tabular-nums">05</div>
         <div class="list-col-grow flex flex-col justify-start">
           <p class="text-lg font-medium">Capítulo 5</p>
           <div class="text-xs uppercase font-semibold opacity-60">No disponible. Por ahora...</div>
@@ -52,7 +52,7 @@
       </li>
 
       <li class="list-row flex">
-        <div class="text-4xl font-thin opacity-30 tabular-nums">06</div>
+        <div class="text-4xl font-thin tabular-nums">06</div>
         <div class="list-col-grow flex flex-col justify-start">
           <p class="text-lg font-medium">Capítulo 6</p>
           <div class="text-xs uppercase font-semibold opacity-60">No disponible. Por ahora...</div>
@@ -60,9 +60,9 @@
       </li>
 
       <li class="list-row flex">
-        <div class="text-4xl font-thin opacity-30 tabular-nums">07</div>
+        <div class="text-4xl font-thin tabular-nums">07</div>
         <div class="list-col-grow flex flex-col justify-start">
-          <p class="text-lg font-medium">Capítulo 7</p>
+          <p class="text-lg font-medium">Capítulo 6.5</p>
           <div class="text-xs uppercase font-semibold opacity-60">No disponible. Por ahora...</div>
         </div>
       </li>

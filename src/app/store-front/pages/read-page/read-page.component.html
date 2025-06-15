@@ -1,6 +1,6 @@
 <div class="container">
   @for (item of forLoop; track $index) {
-    <img src="/assets/images/chapters/{{bookId}}/{{this.chapterParamsService.chapter}}/{{$index + 1}}.webp" class="w-full">
+    <img src="/assets/images/chapters/{{bookId}}/{{this.chapterParamsService.chapter}}/{{$index + 1}}.webp" alt="Manga Image" class="w-full">
   }
 
   @if(this.chapterParamsService.chapter == 1) {
